@@ -6,22 +6,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
-import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles';
-import  Container from '@material-ui/core/Container';
 import  Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import ListaOpcoes from './ListaOpcoes';
-import Paper from '@material-ui/core/Paper';
+import BarraMenu from '../menu/BarraMenu';
 import Grid from '@material-ui/core/Grid';
-
 
 
 function TabPanel(props) {
@@ -94,16 +87,17 @@ export default function Cadastro() {
 
   
   return (
-    <Container>
+   
         <div className={classes.root}>
 
             <div className="text-start">
+                <BarraMenu/>
                 <Typography className="mt-3" component="h1" variant="h6">
-                    Cadastro
+                    Criar conta 
                 </Typography>
             </div>
-        <AppBar position="static">
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <AppBar position="static" color="default">
+            <Tabs value={value} onChange={handleChange} aria-label="etapas do cadastro" indicatorColor="primary" textColor="primary">
             <Tab label="Informações pessoais" {...a11yProps(0)} />
             <Tab label="Quer aprender sobre?" {...a11yProps(1)} />
             <Tab label="Quer compartilhar sobre?" {...a11yProps(2)} />
@@ -203,6 +197,6 @@ export default function Cadastro() {
                         Cadastrar
                         </Button>   
         </div>
-        </Container>  
+
   );
 }
