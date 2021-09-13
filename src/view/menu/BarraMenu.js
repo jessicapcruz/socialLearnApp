@@ -117,6 +117,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
       <MenuItem onClick={handleMenuClose}>Minha conta</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Cadastrar conteúdo</MenuItem>
     </Menu>
   );
 
