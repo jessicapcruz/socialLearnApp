@@ -7,7 +7,7 @@ const Routes = () =>  (
     <Router>
         <Suspense fallback={<div></div>}>
             <Switch>
-                <Route patch="cadastro" component={Home}/>
+                <Route patch="cadastro" component={Cadastro}/>
                 <Route patch="/" component={Home}/>
                 <Route patch="inicio" component={Home}/>
             </Switch>
