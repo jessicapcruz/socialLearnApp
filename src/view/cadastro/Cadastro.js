@@ -199,4 +199,12 @@ export default function Cadastro() {
         </div>
 
   );
+  
+    const mapStateToProps = (state) => ({
+        
+    })
+
+    const mapDispatchToProps = {
+        
+    }
 }

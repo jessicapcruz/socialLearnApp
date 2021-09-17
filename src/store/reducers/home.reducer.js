@@ -1,4 +1,4 @@
-import { actionTypes } from '../actions/cadastro.action'
+import { actionTypes } from '../actions/home.action'
 import initialState from './initialState';
 
 export default (state = initialState.register, { type, payload }) => {

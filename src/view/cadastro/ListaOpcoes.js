@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AutoGrid() {
+export default function ListaOpcoes() {
   const classes = useStyles();
 
   return (
