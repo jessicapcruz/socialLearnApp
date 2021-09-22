@@ -200,11 +200,11 @@ export default function Cadastro() {
 
   );
   
-    const mapStateToProps = (state) => ({
+    // const mapStateToProps = (state) => ({
         
-    })
+    // })
 
-    const mapDispatchToProps = {
+    // const mapDispatchToProps = {
         
-    }
+    // }
 }

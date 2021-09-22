@@ -5,9 +5,9 @@ import BarraMenu from '../menu/BarraMenu';
 import ImageList from './ImageList';
 
 export class Home extends Component {
-    static propTypes = {
-        prop: PropTypes
-    }
+    // static propTypes = {
+    //     prop: PropTypes
+    // }
 
     render() {
         return (
