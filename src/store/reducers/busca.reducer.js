@@ -6,7 +6,7 @@ export default (state = initialState.register, { type, payload }) => {
 
     case actionTypes.CHANGE:
         return { ...state, ...payload }
-    case actionTypes.SUCESS:
+    case actionTypes.SUCCESS:
         return { ...state, ...payload }
     case actionTypes.ERROR:
         return { ...state, ...payload }
