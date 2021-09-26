@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,12 +21,19 @@ import useStyles from './MenuBarStyles';
 
 export default function MenuBar (){
     const classes = useStyles();
+
+    const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);  
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   
+    const registarContent_onClick = useCallback(event => {
+      setAnchorEl(event.currentTarget);      
+      history.push('/cadastro')
+      handleMobileMenuClose();
+    }, [history]);
+
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -55,7 +64,7 @@ export default function MenuBar (){
       >
         <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
         <MenuItem onClick={handleMenuClose}>Minha conta</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Cadastrar conteúdo</MenuItem>
+        <MenuItem onClick={registarContent_onClick}>Cadastrar conteúdo</MenuItem>
       </Menu>
     );
 
