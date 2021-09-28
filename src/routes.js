@@ -2,8 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProgressBar from './components/ProgressBar';
 
-const RegisterContent = lazy(() => import('./pages/Resgister/Content/ContentController'))
-const Home = lazy(() => import('./pages/Home/HomeController'))
+const RegisterContent = lazy(() => import('./pages/Register/Content/contentAdd.controller'))
+const Home = lazy(() => import('./pages/Home/home.controller'))
 const Busca = lazy(() => import('./view/busca/Busca'))
 
 const Routes = () =>  (

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import './App.css';
 
 import Routes from './routes';
-import { store } from './store/store'
+import store from './redux/store';
 import MenuBar from './components/Menu/MenuBar';
 
 function App() {

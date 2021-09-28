@@ -1,5 +1,5 @@
 import React from 'react';
-import AdvancedImageList from './../../components/AdvancedImageList/AdvancedImageList';
+import AdvancedImageList from '../../components/AdvancedImageList/AdvancedImageList';
 
 function HomeView(props) {
     return (
