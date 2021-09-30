@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,10 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import ListaOpcoes from './ListaOpcoes';
 import BarraMenu from '../menu/BarraMenu';
 import Grid from '@material-ui/core/Grid';
-import { changeValue, cadastrar } from '../../store/actions/cadastro.action';
 import 'react-toastify/dist/ReactToastify.css'
-import axios from 'axios'
-
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -118,77 +115,37 @@ export default function Cadastro() {
     setCheckPass(event.target.value);
   };
 
-  const cadastrar = (props) =>  {
-   
-
-
+  const cadastrar = () =>  {
     const notify = (message, type)=>{ 
-  
-      // Calling toast method by passing string
       if (type === 'error') {
         toast.error(message) 
       } else {
         toast.success(message) 
       }
-      
   }
 
-
-  // if (pass != checkPass ) {
-  //   notify('As senhas precisam ser iguais', 'error');
-  // } else {
-  //     try {   
-  //       const params = {  name : name, password: pass,  email: email };
-  //       axios.post('http://localhost:3333/api/user/register', params.toString())
-  //       .then(response => {
-  //         console.log('sucesso1' + response.json());
-  //       })
-  //       .then(data => 
-  //         {
-  //             notify(data.message, 'error');
-  //               console.log('sucesso' + data.message);
-  //               console.log('sucesso' + data.statusCode);
-  //             })
-  //             .catch(error => {
-  //               console.log('error' +error.message);
-  //               notify(error.message, 'error');
-  //             })
-
-  //     }catch (error) {
-  //       if (axios.isAxiosError(error)) {
-  //         console.log('erro1' + error);
-  //       } else {
-  //         console.log('error2' + error);
-  //       }
-  //     }
-  //   }
-
-
-     fetch('http://localhost:3333/api/user/register', {
-       method: 'POST',
-       mode: 'cors', // no-cors, *cors, same-origin
-       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-       credentials: 'same-origin', // include, *same-origin, omit
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       redirect: 'follow', // manual, *follow, error
-       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-       body: JSON.stringify({ name : name, password: pass,  email: email}) // body data type must match "Content-Type" header
-     })
-     .then(response => response.json())
-     .then(data => 
-       {
-
-         console.log('sucesso' + data.message);
-         console.log('sucesso' + data.statusCode);
-       })
-       .catch(err => { console.log(err) })
-
+  const axios = require("axios");
+   if (pass != checkPass ) {
+     notify('As senhas precisam ser iguais', 'error');
+   } else {
+    axios({
+      url: 'http://localhost:3333/api/user/register',
+      data: {  name : name, password: pass,  email: email },
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(response => {
+      if (response.statusCode === 200) {
+        notify('Usuário cadastrado com sucesso', 'sucess');
+      }
+    }).catch(error => {
+        notify(error.message, 'error');
+    })
+    }
   }
 
   return (
-   
         <div className={classes.root}>
             <ToastContainer />
             <div className="text-start">
@@ -313,11 +270,3 @@ export default function Cadastro() {
   );
   
 }
-const mapStateToProps = (state) => ({
-  dados: state.cadastroReducer.register
-})
-
-const mapDispatchToProps = dispatch => ({
-  //cadastrar: (register) => dispatch(cadastrar(register)),
-  changeValue: (value) => dispatch(changeValue(value))
-})
