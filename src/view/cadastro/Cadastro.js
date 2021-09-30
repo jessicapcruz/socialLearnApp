@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,6 +15,11 @@ import FormControl from '@material-ui/core/FormControl';
 import ListaOpcoes from './ListaOpcoes';
 import BarraMenu from '../menu/BarraMenu';
 import Grid from '@material-ui/core/Grid';
+import { changeValue, cadastrar } from '../../store/actions/cadastro.action';
+import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
+
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function TabPanel(props) {
@@ -73,23 +78,119 @@ export default function Cadastro() {
   const classes = useStyles();
   const classesSelect = useStylesSelect();
   const [value, setValue] = React.useState(0);
+  const [gender, setGender] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [pass, setPass] = React.useState('');
+  const [checkPass, setCheckPass] = React.useState('');
 
-  
+
   const handleChange = (event, newValue) => {
+    console.log(newValue);
     setValue(newValue);
   };
 
-  const [gender, setGender] = React.useState('');
-
   const handleChangeGender = (event) => {
+    console.log(event.target.value);
     setGender(event.target.value);
   };
 
+  const handleChangeName = (event) => {
+    console.log(event.target.value);
+    setName(event.target.value);
+  };
+
+  const handleChangeLastName = (event) => {
+    console.log(event.target.value);
+    setLastName(event.target.value);
+  };
+  const handleChangeEmail = (event) => {
+    console.log(event.target.value);
+    setEmail(event.target.value);
+  };
+  const handleChangePass = (event) => {
+    console.log(event.target.value);
+    setPass(event.target.value);
+  };
+  const handleChangeCheckPass = (event) => {
+    console.log(event.target.value);
+    setCheckPass(event.target.value);
+  };
+
+  const cadastrar = (props) =>  {
+   
+
+
+    const notify = (message, type)=>{ 
   
+      // Calling toast method by passing string
+      if (type === 'error') {
+        toast.error(message) 
+      } else {
+        toast.success(message) 
+      }
+      
+  }
+
+
+  // if (pass != checkPass ) {
+  //   notify('As senhas precisam ser iguais', 'error');
+  // } else {
+  //     try {   
+  //       const params = {  name : name, password: pass,  email: email };
+  //       axios.post('http://localhost:3333/api/user/register', params.toString())
+  //       .then(response => {
+  //         console.log('sucesso1' + response.json());
+  //       })
+  //       .then(data => 
+  //         {
+  //             notify(data.message, 'error');
+  //               console.log('sucesso' + data.message);
+  //               console.log('sucesso' + data.statusCode);
+  //             })
+  //             .catch(error => {
+  //               console.log('error' +error.message);
+  //               notify(error.message, 'error');
+  //             })
+
+  //     }catch (error) {
+  //       if (axios.isAxiosError(error)) {
+  //         console.log('erro1' + error);
+  //       } else {
+  //         console.log('error2' + error);
+  //       }
+  //     }
+  //   }
+
+
+     fetch('http://localhost:3333/api/user/register', {
+       method: 'POST',
+       mode: 'cors', // no-cors, *cors, same-origin
+       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+       credentials: 'same-origin', // include, *same-origin, omit
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       redirect: 'follow', // manual, *follow, error
+       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+       body: JSON.stringify({ name : name, password: pass,  email: email}) // body data type must match "Content-Type" header
+     })
+     .then(response => response.json())
+     .then(data => 
+       {
+
+         console.log('sucesso' + data.message);
+         console.log('sucesso' + data.statusCode);
+       })
+       .catch(err => { console.log(err) })
+
+  }
+
   return (
    
         <div className={classes.root}>
-
+            <ToastContainer />
             <div className="text-start">
                 <BarraMenu/>
                 <Typography className="mt-3" component="h1" variant="h6">
@@ -115,6 +216,8 @@ export default function Cadastro() {
                         label="Nome"
                         name="name"
                         type="text"
+                        value={name}
+                        onChange={handleChangeName}
                         />
                 </Grid>
                 <Grid item xs={6}>
@@ -127,6 +230,8 @@ export default function Cadastro() {
                         label="Sobrenome"
                         name="sobrenome"
                         type="text"
+                        value={lastName}
+                        onChange={handleChangeLastName}
                         />
                 </Grid>
                 <Grid item xs={6}>
@@ -139,6 +244,8 @@ export default function Cadastro() {
                         label="E-mail"
                         name="email"
                         type="email"
+                        value={email}
+                        onChange={handleChangeEmail}
                         />  
                 </Grid>
                 <Grid item xs={6}>
@@ -165,6 +272,8 @@ export default function Cadastro() {
                         label="Senha"
                         name="password"
                         type="password"
+                        value={pass}
+                        onChange={handleChangePass}
                         /> 
                 </Grid>
                 <Grid item xs={6}>
@@ -177,6 +286,8 @@ export default function Cadastro() {
                         label="Confirmar senha"
                         name="confirmarpass"
                         type="password"
+                        value={checkPass}
+                        onChange={handleChangeCheckPass}
                         />  
                 </Grid> 
             </Grid>
@@ -193,18 +304,20 @@ export default function Cadastro() {
                         fullWidth
                         color="primary"
                         size="large"
-                        className="mb-3 mb-md-4 mt-4">
+                        className="mb-3 mb-md-4 mt-4"
+                        onClick={() => cadastrar()}>
                         Cadastrar
                         </Button>   
         </div>
 
   );
   
-    const mapStateToProps = (state) => ({
-        
-    })
-
-    const mapDispatchToProps = {
-        
-    }
 }
+const mapStateToProps = (state) => ({
+  dados: state.cadastroReducer.register
+})
+
+const mapDispatchToProps = dispatch => ({
+  //cadastrar: (register) => dispatch(cadastrar(register)),
+  changeValue: (value) => dispatch(changeValue(value))
+})

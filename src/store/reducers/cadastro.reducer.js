@@ -1,17 +1,26 @@
 import { actionTypes } from '../actions/cadastro.action'
 import initialState from './initialState';
 
-export default (state = initialState.register, { type, payload }) => {
-    switch (type) {
+const cadastroReducer =  (state = initialState.register, action) => {
+    switch (action.type) {
 
-    case actionTypes.CHANGE:
-        return { ...state, ...payload }
-    case actionTypes.SUCESS:
-        return { ...state, ...payload }
-    case actionTypes.ERROR:
-        return { ...state, ...payload }
-        
-    default:
-        return state
+        case actionTypes.CHANGE:
+            return { 
+                ...state, 
+                register: {
+                    ...state.register,
+                    ...action.payload
+
+                } 
+            }
+        case actionTypes.SUCESS:
+            return { ...state, ...action.payload }
+        case actionTypes.ERROR:
+            return { ...state, ...action.payload }
+            
+        default:
+            return state
     }
 }
+
+export default cadastroReducer;

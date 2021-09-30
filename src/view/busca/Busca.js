@@ -8,8 +8,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import { red } from '@mui/material/colors';
 import CardMedia from '@mui/material/CardMedia';
 
 const bull = (
@@ -57,7 +55,7 @@ export class Busca extends Component {
                 <div className="text-start">
                     <BarraMenu/>
                     <Typography className="mt-3" component="h1" variant="h6">
-                        O que você quer aprender?
+                        Resultado da sua busca
                     </Typography>
                 </div>
                 <div className="mt-5">
