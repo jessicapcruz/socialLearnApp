@@ -1,9 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ProgressBar from './components/ProgressBar/ProgressBar';
+import ProgressBar from './components/ProgressBar';
 
-//const Cadastro = lazy(() => import('./view/cadastro/Cadastro'))
-const Cadastro = lazy(() => import('./pages/Register/RegisterController'))
+const Cadastro = lazy(() => import('./view/cadastro/Cadastro'))
 const Home = lazy(() => import('./pages/Home/HomeController'))
 const Busca = lazy(() => import('./view/busca/Busca'))
 
