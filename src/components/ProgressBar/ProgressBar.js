@@ -23,6 +23,4 @@ export class ProgressBar extends Component {
     }
 }
 
-
-
 export default withStyles(styles)(ProgressBar)
