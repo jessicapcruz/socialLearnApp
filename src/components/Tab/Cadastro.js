@@ -13,11 +13,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import ListaOpcoes from './../../components/ListaOpcoes/ListaOpcoes';
-
 import Grid from '@material-ui/core/Grid';
 import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer, toast } from 'react-toastify';
-
+import { ToastContainer } from 'react-toastify';
+import { registerUser , notify } from '../../store/actions/cadastro.action';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,66 +83,37 @@ export default function Cadastro() {
 
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
   };
 
   const handleChangeGender = (event) => {
-    console.log(event.target.value);
     setGender(event.target.value);
   };
 
   const handleChangeName = (event) => {
-    console.log(event.target.value);
     setName(event.target.value);
   };
 
   const handleChangeLastName = (event) => {
-    console.log(event.target.value);
     setLastName(event.target.value);
   };
   const handleChangeEmail = (event) => {
-    console.log(event.target.value);
     setEmail(event.target.value);
   };
   const handleChangePass = (event) => {
-    console.log(event.target.value);
     setPass(event.target.value);
   };
   const handleChangeCheckPass = (event) => {
-    console.log(event.target.value);
     setCheckPass(event.target.value);
   };
 
-  // const cadastrar = () =>  {
-  //   const notify = (message, type)=>{ 
-  //     if (type === 'error') {
-  //       toast.error(message) 
-  //     } else {
-  //       toast.success(message) 
-  //     }
-  // }
-
-  // const axios = require("axios");
-  //  if (pass != checkPass ) {
-  //    notify('As senhas precisam ser iguais', 'error');
-  //  } else {
-  //   axios({
-  //     url: 'http://localhost:3333/api/user/register',
-  //     data: {  name : name, password: pass,  email: email },
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   }).then(response => {
-  //     if (response.statusCode === 200) {
-  //       notify('Usuário cadastrado com sucesso', 'sucess');
-  //     }
-  //   }).catch(error => {
-  //       notify(error.message, 'error');
-  //   })
-  //   }
-  // }
+  const cadastrar = () =>  {
+    if (pass !== checkPass) {
+      notify ('As senhas devem ser iguais', 'error')
+    } else {
+      registerUser({  name : name, senha: pass,  email: email });
+    }   
+  }
 
   return (
     
@@ -258,7 +228,7 @@ export default function Cadastro() {
             <TabPanel value={value} index={2}>
                 <ListaOpcoes></ListaOpcoes>
             </TabPanel>
-            {/* <Button
+            { <Button
                 type="button"
                 variant="contained"
                 fullWidth
@@ -267,7 +237,7 @@ export default function Cadastro() {
                 className="mb-3 mb-md-4 mt-4"
                 onClick={() => cadastrar()}>
                 Criar conta
-            </Button> */}
+            </Button> }
           </div>   
         </div>
 
