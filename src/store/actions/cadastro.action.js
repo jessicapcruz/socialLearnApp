@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-
+import {rootUrl } from '../../config/globalConfig'
 
 export const actionTypes = {
     CHANGE: 'CHANGE',
@@ -27,16 +27,19 @@ export const registerUser = (data) => {
     const axios = require("axios");
 
     axios({
-    url: 'http://localhost:3333/api/user/register',
-    data: { name : data.name, password: data.senha,  email: data.email },
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
+        url: 'http://localhost:3333/api/user/register',
+        data: { name : data.name, password: data.senha,  email: data.email },
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
     }).then(response => {
-    if (response.statusCode === 200) {
-        notify('Usuário cadastrado com sucesso', 'sucess');
-    }
+        console.log(JSON.stringify(response));
+        if (response.status === 200) {
+            notify('Usuário cadastrado com sucesso', 'sucess');
+            window.location.replace(rootUrl + 'inicio');
+        }
+
     }).catch(error => {
         notify(error.message, 'error');
     })
