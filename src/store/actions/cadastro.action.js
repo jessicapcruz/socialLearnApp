@@ -1,6 +1,10 @@
+import { toast } from 'react-toastify';
+import {rootUrl } from '../../config/globalConfig'
+
 export const actionTypes = {
     CHANGE: 'CHANGE',
     SUCCESS: 'SUCCESS',
+    LOADING : 'LOADING',
     ERROR: 'ERROR'
 }
 
@@ -20,8 +24,39 @@ export const success = (payload) => ({
 })
 
 export const registerUser = (data) => {
-    return dispatch => {
+    const axios = require("axios");
 
-    }
+    axios({
+        url: 'http://localhost:3333/api/user/register',
+        data: { name : data.name, password: data.senha,  email: data.email },
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        console.log(JSON.stringify(response));
+        if (response.status === 200) {
+            notify('Usuário cadastrado com sucesso', 'sucess');
+            window.location.replace(rootUrl + 'inicio');
+        }
+
+    }).catch(error => {
+        notify(error.message, 'error');
+    })
 }
 
+export const loading =  (bool, msg = null) => ({
+    type: actionTypes.LOADING,
+    isLoading: {
+        active: bool, 
+        msg: msg
+    }
+}) 
+
+export const notify = (message, type)=>{ 
+    if (type === 'error') {
+      toast.error(message) 
+    } else {
+      toast.success(message) 
+    }
+}

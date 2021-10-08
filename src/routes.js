@@ -4,7 +4,7 @@ import ProgressBar from './components/ProgressBar';
 
 const Cadastro = lazy(() => import('./view/cadastro/Cadastro'))
 const Home = lazy(() => import('./pages/Home/HomeController'))
-const Busca = lazy(() => import('./view/busca/Busca'))
+const Busca = lazy(() => import('./pages/Busca/BuscaController'))
 
 const Routes = () =>  (
     <Router>
