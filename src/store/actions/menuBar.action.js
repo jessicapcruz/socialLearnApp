@@ -26,7 +26,7 @@ export const searchContent = (data) => {
     const axios = require("axios");
 
     axios({
-        url: 'http://localhost:3333/api/contentarea',
+        url: ' http://localhost:3333/api/learningContents/',
         data: { data },
         method: 'GET',
         headers: {
