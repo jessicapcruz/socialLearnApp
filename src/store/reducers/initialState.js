@@ -23,5 +23,8 @@ export default {
         horizontal: 'center',
         time: 3000,
         msg: ''
+    }, 
+    search: {
+        conteudo: {}
     }
 }
