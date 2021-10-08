@@ -24,13 +24,14 @@ export const success = (payload) => ({
 
 export const searchContent = (data) => {
     const axios = require("axios");
-
+    
     axios({
         url: ' http://localhost:3333/api/learningContents/',
         data: { data },
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSsOpc3NpY2EiLCJzdWIiOiI2MTU1MTI1YmQzZWZjZDdiODM1NWNhYjciLCJlbWFpbCI6Implc3NpY2FfcF9jcnV6QGhvdG1haWwuY29tIiwiaWF0IjoxNjMzNjYwOTg5LCJleHAiOjE2MzM3NDczODl9.CMKgEddQZeZ7_jj_SV3XBNtb5ySThagvppqH0Ai4E3o'
         },
     }).then(response => {
         console.log(JSON.stringify(response));
