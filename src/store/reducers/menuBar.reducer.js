@@ -2,6 +2,7 @@ import { actionTypes } from '../actions/menuBar.action'
 import initialState from './initialState';
 
 const menuBarReducer =  (state = initialState.search, action) => {
+    console.log('menuBarReducer');
     switch (action.type) {
 
         case actionTypes.CHANGE:
