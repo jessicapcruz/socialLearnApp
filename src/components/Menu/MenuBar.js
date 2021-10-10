@@ -16,8 +16,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Star from '@material-ui/icons/Star';
-
 import useStyles from './MenuBarStyles';
+import { searchContent } from '../../store/actions/menuBar.action';
+
 
 export default function MenuBar (){
     const classes = useStyles();
@@ -55,6 +56,12 @@ export default function MenuBar (){
     const handleMobileMenuOpen = (event) => {
       setMobileMoreAnchorEl(event.currentTarget);
     };
+
+    const onKeyUp = (event) => {
+      if (event.charCode === 13) {
+        searchContent(event.target.value);
+      }
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -147,6 +154,7 @@ export default function MenuBar (){
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                onKeyPress={onKeyUp}
               />
             </div>
             <div className={classes.grow} />

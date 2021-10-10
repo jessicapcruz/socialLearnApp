@@ -7,6 +7,9 @@ const ContentList = lazy(() => import('./pages/Register/Content/contentList.cont
 const ContentEdit = lazy(() => import('./pages/Register/Content/contentAdd.controller'));
 const Home = lazy(() => import('./pages/Home/home.controller'));
 const Busca = lazy(() => import('./view/busca/Busca'));
+const Cadastro = lazy(() => import('./pages/Register/RegisterController'))
+const Home = lazy(() => import('./pages/Home/HomeController'))
+const Busca = lazy(() => import('./pages/Busca/BuscaController'))
 
 const Routes = () =>  (
     <Suspense fallback={<div className='mt-5 pt-5'><ProgressBar/></div>}>

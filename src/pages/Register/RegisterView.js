@@ -1,0 +1,15 @@
+import React from 'react';
+import MenuBar from './../../components/Menu/MenuBar';
+import Cadastro from '../../components/Register/Cadastro';
+
+function RegisterView(props) {
+    return (
+        <div>
+            <MenuBar/>
+            <div className="pt-2 ">
+                <Cadastro/>
+            </div>
+        </div>
+    );
+}
+export default RegisterView;
