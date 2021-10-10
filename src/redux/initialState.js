@@ -7,10 +7,11 @@ const initialState = {
         isError: false,
         errorMessage:  ''
     },
-    user: {
+    register: {
         username: '',
         email: '',
         password: '',
+        gender: '',
         error: {}
     },
     content: {  
