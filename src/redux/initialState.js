@@ -9,7 +9,9 @@ const initialState = {
     },
     user: {
         username: '',
-        email: ''
+        email: '',
+        password: '',
+        error: {}
     },
     content: {  
         id: "",
@@ -27,6 +29,9 @@ const initialState = {
         horizontal: 'center',
         time: 3000,
         msg: ''
+    },
+    search: {
+        conteudo: {}
     }
 }
 export default initialState;
