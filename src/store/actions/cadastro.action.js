@@ -28,16 +28,15 @@ export const registerUser = (data) => {
 
     axios({
         url: 'http://localhost:3333/api/user/register',
-        data: { name : data.name, password: data.senha,  email: data.email },
+        data: { name : data.name, password: data.senha,  email: data.email, gender: data.gender },
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
     }).then(response => {
-        console.log(JSON.stringify(response));
         if (response.status === 200) {
             notify('Usuário cadastrado com sucesso', 'sucess');
-            window.location.replace(rootUrl + 'inicio');
+            window.location.replace(rootUrl + 'login');
         }
 
     }).catch(error => {
