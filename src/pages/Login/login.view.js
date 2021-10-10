@@ -4,7 +4,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const LoginView = ( {onSubmit, isFetching} ) =>{
+
+const LoginView = ( { formik, isFetching} ) =>{
     const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
     const avatarStyle={backgroundColor:'#1bbd7e'}
     const btnstyle={margin:'8px 0'}
@@ -16,13 +17,27 @@ const LoginView = ( {onSubmit, isFetching} ) =>{
                      <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                     <h2>Sign In</h2>
                 </Grid>
-                <form onSubmit={() => onSubmit()}>
-                    <TextField label='Username' placeholder='Enter username' fullWidth required />
-                    <TextField label='Password' placeholder='Enter password' type='password' fullWidth required/>
+                <form onSubmit={formik.handleSubmit}>
+                    <TextField 
+                        label='Username' 
+                        placeholder='Enter username' 
+                        fullWidth 
+                        required
+                        value={formik.values.email}
+                        onChange={formik.handleChange} />
+                    <TextField 
+                        label='Password' 
+                        placeholder='Enter password' 
+                        type='password' 
+                        fullWidth 
+                        required
+                        value={formik.values.password}
+                        onChange={formik.handleChange}/>
                     <FormControlLabel
                         control={ <Checkbox name="checkedB" color="primary"/> }
                         label="Remember me"
                     />
+
                     <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>
                     {isFetching ? (
                         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"

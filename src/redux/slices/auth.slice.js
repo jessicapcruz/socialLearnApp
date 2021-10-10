@@ -3,14 +3,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import initialState from '../initialState';
 import authService from './../../services/auth.service';
 
-export const loginAuth = createAsyncThunk(
-    "auth/login",
-    async ({ email, password }, thunkAPI) => {
+export const login = createAsyncThunk(
+    "login",
+    async ({ username, password }, thunkAPI) => {
       try {
-        const response = await authService.authenticate(email, password);
+        console.log('calling', username, password);
+        const response = await authService.authenticate(username, password);
         console.log("response", response);
         if (response.status === 200) {
-            localStorage.setItem("token", response.data.token)
             return response.data;
         } 
         else return thunkAPI.rejectWithValue(response.data)
@@ -34,26 +34,27 @@ const authSlice = createSlice({
         },
     },
     extraReducers: {
-        [loginAuth.fulfilled]: (state, { payload }) => {
+        [login.fulfilled]: (state, { payload }) => {
+            console.log('fullfilled', payload);
+            localStorage.setItem("token", payload.token);
             state.email = payload.email;
             state.username = payload.name;
             state.isFetching = false;
             state.isSuccess = true;
             return state;
         },
-        [loginAuth.rejected]: (state, { payload }) => {
-            console.log('payload', payload);
+        [login.rejected]: (state, { payload }) => {
+            console.log('rejected', payload);
             state.isFetching = false;
             state.isError = true;
             state.errorMessage = payload.message;
         },
-        [loginAuth.pending]: (state) => {
+        [login.pending]: (state) => {
             state.isFetching = true;
         },
     }
 });
 
-//Redux cria as actions atuomaticamente para nós
-export const { clearState } = authSlice.actions;
-export const authSelector = (state) => state.auth;
 export default authSlice;
+export const { clearState } = authSlice.actions;
+export const authSelector = state => state.auth

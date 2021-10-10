@@ -1,6 +1,7 @@
 const initialState = {
     auth: {
-        token: {},
+        username: '',
+        email: '',
         isFetching: false,
         isSuccess: false,
         isError: false,

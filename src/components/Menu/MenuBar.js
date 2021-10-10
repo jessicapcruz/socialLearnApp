@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -30,8 +30,13 @@ export default function MenuBar (){
   
     const registarContent_onClick = useCallback(event => {
       setAnchorEl(event.currentTarget);      
-      history.push('/cadastro')
+      history.push('/content-list');
       handleMobileMenuClose();
+    }, [history]);
+
+    const login_onClick = useCallback(event => {
+      setAnchorEl(event.currentTarget);      
+      history.push('/login')
     }, [history]);
 
     const handleProfileMenuOpen = (event) => {
@@ -64,6 +69,7 @@ export default function MenuBar (){
       >
         <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
         <MenuItem onClick={handleMenuClose}>Minha conta</MenuItem>
+        <MenuItem onClick={login_onClick}>LogIn</MenuItem>
         <MenuItem onClick={registarContent_onClick}>Cadastrar conteúdo</MenuItem>
       </Menu>
     );
