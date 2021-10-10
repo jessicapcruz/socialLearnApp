@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import  Button from '@material-ui/core/Button';
@@ -12,45 +9,10 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import ListaOpcoes from './../../components/ListaOpcoes/ListaOpcoes';
-import Grid from '@material-ui/core/Grid';
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify';
 import { registerUser , notify } from '../../store/actions/cadastro.action';
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-      
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const useStylesSelect = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 570,
+      minWidth: 200,
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -73,18 +35,11 @@ const useStylesSelect = makeStyles((theme) => ({
 export default function Cadastro() {
   const classes = useStyles();
   const classesSelect = useStylesSelect();
-  const [value, setValue] = React.useState(0);
   const [gender, setGender] = React.useState('');
   const [name, setName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [pass, setPass] = React.useState('');
   const [checkPass, setCheckPass] = React.useState('');
-
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   const handleChangeGender = (event) => {
     setGender(event.target.value);
@@ -94,9 +49,7 @@ export default function Cadastro() {
     setName(event.target.value);
   };
 
-  const handleChangeLastName = (event) => {
-    setLastName(event.target.value);
-  };
+ 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
   };
@@ -108,15 +61,30 @@ export default function Cadastro() {
   };
 
   const cadastrar = () =>  {
-    if (pass !== checkPass) {
-      notify ('As senhas devem ser iguais', 'error')
+    let mensagem = '';
+    if (name.length === 0) {
+      mensagem += 'O campo nome é obrigatório; ';
+    } 
+    if (email.length === 0) {
+      mensagem += 'O campo e-mail é 0brigatório; ';
+    } 
+    if (pass.length === 0) {
+      mensagem += 'O campo senha é obrigatório; ';
     } else {
-      registerUser({  name : name, senha: pass,  email: email });
+      if (pass !== checkPass) {
+        mensagem += 'As senhas devem ser iguais; ';
+      }
+    }
+
+    if (mensagem.length !== 0) {
+      notify ('Verifique o preenchimento dos campos obrigatório: ' + mensagem, 'error')
+    } else {
+      registerUser({  name : name, senha: pass,  email: email, gender: gender});
     }   
   }
 
   return (
-    
+
         <div className={classes.root}>
           <ToastContainer />
           <div className="text-start">
@@ -127,108 +95,67 @@ export default function Cadastro() {
             <Typography className="mt-3" component="h1" variant="h6">
                 Inscreva-se e comece a aprender!
             </Typography>
-            <AppBar position="static" color="default">
-                <Tabs value={value} onChange={handleChange} aria-label="etapas do cadastro" indicatorColor="primary" textColor="primary">
-                <Tab label="Informações pessoais" {...a11yProps(0)} />
-                <Tab label="Quer aprender sobre?" {...a11yProps(1)} />
-                <Tab label="Quer compartilhar sobre?" {...a11yProps(2)} />
-                </Tabs>
-            </AppBar>
-            <TabPanel value={value} index={0}>
-                <Grid container spacing={3}>
-                    <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="name"
-                            label="Nome"
-                            name="name"
-                            type="text"
-                            value={name}
-                            onChange={handleChangeName}
-                            />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="sobrenome"
-                            label="Sobrenome"
-                            name="sobrenome"
-                            type="text"
-                            value={lastName}
-                            onChange={handleChangeLastName}
-                            />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="E-mail"
-                            name="email"
-                            type="email"
-                            value={email}
-                            onChange={handleChangeEmail}
-                            />  
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormControl className={classesSelect.formControl}>
-                            <InputLabel id="genero">Genero</InputLabel>
-                            <Select
-                                labelId="genero"
-                                id="genero"
-                                value={gender}
-                                onChange={handleChangeGender}
-                                >
-                                <MenuItem value={'F'}>Feminino</MenuItem>
-                                <MenuItem value={'M'}>Masculino</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="password"
-                            label="Senha"
-                            name="password"
-                            type="password"
-                            value={pass}
-                            onChange={handleChangePass}
-                            /> 
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="confirmarpass"
-                            label="Confirmar senha"
-                            name="confirmarpass"
-                            type="password"
-                            value={checkPass}
-                            onChange={handleChangeCheckPass}
-                            />  
-                    </Grid> 
-                </Grid>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <ListaOpcoes></ListaOpcoes>
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <ListaOpcoes></ListaOpcoes>
-            </TabPanel>
-            { <Button
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Nome"
+              name="name"
+              type="text"
+              value={name}
+              onChange={handleChangeName}
+            />
+          <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="E-mail"
+              name="email"
+              type="email"
+              value={email}
+              onChange={handleChangeEmail}
+            />  
+          <FormControl className={classesSelect.formControl}>
+            <InputLabel id="genero">Genero</InputLabel>
+            <Select
+                labelId="genero"
+                id="genero"
+                value={gender}
+                onChange={handleChangeGender}
+                >
+                <MenuItem value={'F'}>Feminino</MenuItem>
+                <MenuItem value={'M'}>Masculino</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="password"
+              label="Senha"
+              name="password"
+              type="password"
+              value={pass}
+              onChange={handleChangePass}
+            /> 
+          <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="confirmarpass"
+              label="Confirmar senha"
+              name="confirmarpass"
+              type="password"
+              value={checkPass}
+              onChange={handleChangeCheckPass}
+            />  
+            <Button
                 type="button"
                 variant="contained"
                 fullWidth
@@ -237,7 +164,7 @@ export default function Cadastro() {
                 className="mb-3 mb-md-4 mt-4"
                 onClick={() => cadastrar()}>
                 Criar conta
-            </Button> }
+            </Button> 
           </div>   
         </div>
 
