@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -20,12 +22,29 @@ import { searchContent } from '../../store/actions/menuBar.action';
 
 export default function MenuBar (){
     const classes = useStyles();
+
+    const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);  
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   
+    const registarContent_onClick = useCallback(event => {
+      setAnchorEl(event.currentTarget);      
+      history.push('/content-list');
+      handleMobileMenuClose();
+    }, [history]);
+
+    const login_onClick = useCallback(event => {
+      setAnchorEl(event.currentTarget);      
+      history.push('/login');
+    }, [history]);
+
+    const registerUser_onClick = useCallback(event => {
+      setAnchorEl(event.currentTarget);      
+      history.push('/user-add');
+    }, [history]);
+
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -61,8 +80,9 @@ export default function MenuBar (){
         onClose={handleMenuClose}
       >
         <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Minha conta</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Cadastrar conteúdo</MenuItem>
+        <MenuItem onClick={registerUser_onClick}>Minha conta</MenuItem>
+        <MenuItem onClick={login_onClick}>LogIn</MenuItem>
+        <MenuItem onClick={registarContent_onClick}>Cadastrar conteúdo</MenuItem>
       </Menu>
     );
 

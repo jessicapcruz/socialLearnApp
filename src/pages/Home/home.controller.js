@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HomeView from './HomeView';
+import HomeView from './home.view';
 
 class HomeController extends Component {
 

@@ -1,11 +1,11 @@
-import imageKotlin from '../../resources/images/kotlincourse.jpg';
-import imageMongo from '../../resources/images/mongo.jpg';
-import imageSQL from '../../resources/images/sql.jpg';
-import imagePython from '../../resources/images/python.png';
-import imageJavaWeb from '../../resources/images/javaWeb.jpg';
-import imageJava from '../../resources/images/java.jpg';
-import imageIOT from '../../resources/images/IOT.jpg';
-import imageCsharp from '../../resources/images/csharp.jpg';
+import imageKotlin from '../../assets/images/kotlincourse.jpg';
+import imageMongo from '../../assets/images/mongo.jpg';
+import imageSQL from '../../assets/images/sql.jpg';
+import imagePython from '../../assets/images/python.png';
+import imageJavaWeb from '../../assets/images/javaWeb.jpg';
+import imageJava from '../../assets/images/java.jpg';
+import imageIOT from '../../assets/images/IOT.jpg';
+import imageCsharp from '../../assets/images/csharp.jpg';
 
 const itemData = [
    {
