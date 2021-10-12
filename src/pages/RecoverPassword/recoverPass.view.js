@@ -1,37 +1,32 @@
 import React from 'react';
-import { TextField, Button, Typography,Link } from '@material-ui/core'
-import  { rootURL } from '../../common/constants';
+import { TextField, Button, Typography } from '@material-ui/core'
 import Container from '@material-ui/core/Container'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
-const LoginView = ( { formik, isFetching} ) =>{
+
+const RecoverPassView = ( { formik, isFetching} ) =>{
     const btnstyle={margin:'8px 0'}
 
     return(
         <Container component="main" maxWidth="xs">
+            <ToastContainer/>
             <div className="mt-3 mt-md-5">
                 <div className="text-center">
                     <Typography className="mt-3 font-weight-normal" component="h1" variant="h6"> 
-                        Faça seu login e inicie seus estudos!
+                        Esqueceu sua senha? Digite seu e-mail que enviaremos um link para definir uma nova senha.
                     </Typography>
+
                     <form onSubmit={formik.handleSubmit}>
                     <div className="mt-4">
-                        <TextField 
-                            label='Usuario' 
-                            placeholder='usuario' 
+                        <TextField
+                            id="email" 
+                            label='E-mail' 
+                            placeholder='e-mail' 
                             fullWidth 
                             required
                             value={formik.values.email}
                             onChange={formik.handleChange} />
-
-                        <TextField 
-                            label='Senha' 
-                            placeholder='senha' 
-                            type='password' 
-                            fullWidth 
-                            required
-                            value={formik.values.password}
-                            onChange={formik.handleChange}/>
-
                         <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>
                             {isFetching ? (
                                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -53,20 +48,14 @@ const LoginView = ( { formik, isFetching} ) =>{
                                     </path>
                                 </svg>
                             ) : null}
-                                Entrar
+                                Recuperar
                     </Button>
-                    <Typography>
-                        <Link href="#">Esqueceu sua senha ?</Link>
-                    </Typography>
-                    <Typography > Tem uma conta ?
-                        <Link href={ rootURL + '/user-add'} > Cadastre-se</Link>
-                    </Typography> 
                     </div>
                     </form>
                 </div>
             </div>
-            
+
         </Container>
     )
 }
-export default LoginView;
+export default RecoverPassView;
