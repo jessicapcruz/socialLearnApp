@@ -19,6 +19,7 @@ const Routes = () =>  (
             <Route exact path="/content-edit" component={ContentEdit}/>
             <Route path="/recover-pass" component={Recover}/>
             <Route path="/busca" component={Busca}/>
+            //<Route path="/search-result" component={Busca}/>
             <Route path="/inicio" component={Home}/>
             <Route path="/" component={Home}/>
         </Switch>
