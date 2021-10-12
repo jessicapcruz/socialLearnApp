@@ -14,6 +14,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Star from '@material-ui/icons/Star';
 import useStyles from './MenuBarStyles';
@@ -46,6 +47,13 @@ export default function MenuBar (){
       setAnchorEl(event.currentTarget);      
       history.push('/user-add');
     }, [history]);
+
+    
+    const handleContentsMenuOpen_onClick = useCallback(event => {
+      setAnchorEl(event.currentTarget);      
+      history.push('/content-list');
+    }, [history]);
+
 
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
@@ -107,6 +115,13 @@ export default function MenuBar (){
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      <MenuItem onClick={handleContentsMenuOpen_onClick}>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+            <AccountTreeIcon />
+        </IconButton>
+        <p>Conteúdos</p>
+      </MenuItem>
+      {/* 
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
@@ -116,19 +131,13 @@ export default function MenuBar (){
         <p>Mensagens</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-            <Star />
-        </IconButton>
-        <p>favoritos</p>
-      </MenuItem>
-      <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notificações</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -174,7 +183,14 @@ export default function MenuBar (){
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton aria-label="4 novas mensagens" color="inherit">
+             <IconButton  
+                edge="end"
+                aria-label="conteúdos" 
+                color="inherit"
+                onClick={handleContentsMenuOpen_onClick}>
+                <AccountTreeIcon />
+              </IconButton>
+              {/* <IconButton aria-label="4 novas mensagens" color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge>
@@ -191,7 +207,7 @@ export default function MenuBar (){
                   <NotificationsIcon />
                 </Badge>
                 
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 edge="end"
                 aria-label="usuário"
