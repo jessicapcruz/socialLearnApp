@@ -8,6 +8,7 @@ const ContentEdit = lazy(() => import('./pages/Register/Content/contentAdd.contr
 const UserRegister = lazy(() => import('./pages/Register/RegisterController'));
 const Home = lazy(() => import('./pages/Home/home.controller'))
 const Busca = lazy(() => import('./pages/Busca/BuscaController'))
+const Recover = lazy(() => import('./pages/RecoverPassword/recoverPass.controller'));
 
 const Routes = () =>  (
     <Suspense fallback={<div className='mt-5 pt-5'><ProgressBar/></div>}>
@@ -16,7 +17,9 @@ const Routes = () =>  (
             <Route path="/user-add" component={UserRegister}/>
             <Route path="/content-list" component={ContentList}/>
             <Route exact path="/content-edit" component={ContentEdit}/>
-            <Route path="/search-result" component={Busca}/>
+            <Route path="/recover-pass" component={Recover}/>
+            <Route path="/busca" component={Busca}/>
+            //<Route path="/search-result" component={Busca}/>
             <Route path="/inicio" component={Home}/>
             <Route path="/" component={Home}/>
         </Switch>

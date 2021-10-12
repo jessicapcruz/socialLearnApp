@@ -18,6 +18,19 @@ export const registerUser = createAsyncThunk(
     }
 );
 
+export const recover = createAsyncThunk(
+    "recover/password",
+    async ({ email }, thunkAPI) => {
+      try {
+          console.log('email ' + email)
+        const response = await userService.recover(email);
+        return (response.status === 200)? response.data :  thunkAPI.rejectWithValue(response.data);      
+      } catch (e) {
+        thunkAPI.rejectWithValue(e.response.data)
+      }
+    }
+);
+
 const userInitialState = { register: initialState.register, loading: initialState.loading };
 const userRegisterSlice = createSlice({
     name: "userRegister",
