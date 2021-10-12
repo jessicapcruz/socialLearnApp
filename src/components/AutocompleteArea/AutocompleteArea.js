@@ -2,26 +2,23 @@ import React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-export default function AutocompleteArea(props) {
+export default function AutocompleteArea({id, name, options, setFieldValue, handleInputChange}) {
+  const textFieldId = `contentAreaIds`;
   return (
     <Autocomplete
       multiple
-      id="multiple-Areas"
-      options={areaContents}
+      id={id}
+      name={name}
+      label="Área"
+      options={options}
       getOptionLabel={(option) => option.title}
+      onChange={(e, value) => {
+        setFieldValue(textFieldId, value);
+      }}
       renderInput={(params) => (
-        <TextField {...params} label="Areas do Conteúdo" placeholder="Cloud" />
+        <TextField {...params} name={textFieldId} onChange={handleInputChange} label="Areas do Conteúdo" placeholder="Área"/>
       )}
-      onInputChange={props.handleInputChange}
+      onInputChange={handleInputChange}
     />
   );
 }
-
-const areaContents = [
-  { title: 'Artificial Intelligence', id: 1 },
-  { title: 'Banco de Dados', id: 2 },
-  { title: "Big Data", id: 3 },
-  { title: 'Cloud', id: 4 },
-  { title: 'Internet of Things', id: 5 },
-  { title: 'Programação', id: 6 },
-];
