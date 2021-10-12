@@ -14,9 +14,6 @@ const RecoverPassView = ( { formik, isFetching} ) =>{
             <div className="mt-3 mt-md-5">
                 <div className="text-center">
                     <Typography className="mt-3 font-weight-normal" component="h1" variant="h6"> 
-                        Recuperar senha
-                    </Typography>
-                    <Typography className="mt-3 font-weight-normal" component="h2" variant="h8"> 
                         Esqueceu sua senha? Digite seu e-mail que enviaremos um link para definir uma nova senha.
                     </Typography>
 
