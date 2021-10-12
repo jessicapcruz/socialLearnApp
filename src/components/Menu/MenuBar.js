@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import { useDispatch } from "react-redux";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,11 +17,13 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Star from '@material-ui/icons/Star';
 import useStyles from './MenuBarStyles';
-import { searchContent } from '../../store/actions/menuBar.action';
+//import { searchContent } from '../../store/actions/menuBar.action';
 
+import { searchContent } from "../../redux/slices/search.slice";
 
 export default function MenuBar (){
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -62,9 +64,17 @@ export default function MenuBar (){
       setMobileMoreAnchorEl(event.currentTarget);
     };
 
+
     const onKeyUp = (event) => {
       if (event.charCode === 13) {
-        searchContent(event.target.value);
+        console.log('searchContent');
+        dispatch(searchContent({data:event.target.value }))
+        .unwrap()
+        .then(data => {     
+          history.push(data, 'result', '/search-result');
+       }).catch(e => {
+          console.log(e);
+       });
       }
     }
 
