@@ -1,20 +1,51 @@
 
 //Com reduxjs/toolkit, reducers e actions ficam nos arquivos slices
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import initialState from '../initialState';
+import contentService from './../../services/content.service';
 
-const contentState = initialState.content;
+export const registerContent = createAsyncThunk(
+    "content/register",
+    async ({ name, contentAreaIds}, thunkAPI) => {
+        try {
+            const response = await contentService.register({ name, contentAreaIds});
+            return (response.status === 200) ? 
+                    response.data :  
+                    thunkAPI.rejectWithValue(response.data);      
+        } catch (error) {
+            thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
 const contentsSlice = createSlice({
-    name: "contents",
-    initialState: contentState,
+    name: "contentRegister",
+    initialState: initialState.content,
     reducers: {
-        contentAdded(state, action) {
-            state.push(action.payload);
-        },
+     // add your non-async reducers here
+        clearState: (state) => {
+            state.contentAreas = [];
+            state.name = '';
+            state.id = null;
+            return state;
+        }
     },
+    extraReducers: {
+        // add your async reducers here
+        [registerContent.fulfilled]: (state, { payload }) => {
+            console.log('fullfilled', payload);
+            state = payload;
+            return state;
+        },
+        [registerContent.rejected]: (state, { payload }) => {
+            console.log('rejected', payload);
+            state = payload;
+        },
+        [registerContent.pending]: (state) => {
+            //state.loading.open = true;
+        },
+    }
 });
 
-//Redux cria as actions atuomaticamente para nós
-export const { contentAdded } = contentsSlice.actions;
-//Reducer para configurar na store  
+export const { clearState } = contentsSlice.actions;
 export default contentsSlice.reducer;

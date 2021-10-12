@@ -5,9 +5,9 @@ import ProgressBar from './components/ProgressBar';
 const Login = lazy(() => import('./pages/Login/login.controller'));
 const ContentList = lazy(() => import('./pages/Register/Content/contentList.controller'));
 const ContentEdit = lazy(() => import('./pages/Register/Content/contentAdd.controller'));
-const UserRegister = lazy(() => import('./pages/Register/RegisterController'));
-const Home = lazy(() => import('./pages/Home/home.controller'))
-const Busca = lazy(() => import('./pages/Busca/BuscaController'))
+const UserRegister = lazy(() => import('./pages/Register/User/RegisterController'));
+const Home = lazy(() => import('./pages/Home/home.controller'));
+const Busca = lazy(() => import('./pages/Busca/BuscaController'));
 
 const Routes = () =>  (
     <Suspense fallback={<div className='mt-5 pt-5'><ProgressBar/></div>}>
