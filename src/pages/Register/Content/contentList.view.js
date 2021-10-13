@@ -13,6 +13,7 @@ import { red } from '@mui/material/colors';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Button from '@material-ui/core/Button';
+import PageListToolbar from './../../../components/PageListToolbar';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         margin: theme.spacing(1),
         justifyContent: 'space-evenly'
+    },
+    title: {
+        color: "#0000a8",
+        fontWeight: "bold"
     }
 }));
 
@@ -38,23 +43,15 @@ function GridItem({ classes }) {
                         R
                     </Avatar>
                 }
-                title="Shrimp and Chorizo Paella"
+                title="React"
                 subheader="September 14, 2016"
             />
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Curso 1
+                    Programação
                 </Typography>
                 <Typography variant="h5" component="div">
-                    Resumo curso 1
-                </Typography>
-                <Typography variant="body2">
-                    descrição
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                This impressive paella is a perfect party dish and a fun meal to cook
-                together with your guests. Add 1 cup of frozen peas along with the mussels,
-                if you like.
+                   React
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -75,24 +72,14 @@ const ContentListView = (props) => {
     const history = useHistory();
 
     return (
-        <div>
+        <div className="p-2">
             <div className="MuiPaper-root app-page-title MuiPaper-elevation2">
                 <div classes={classes.pageHeader}>
                     <div className="app-page-title--first">
+                        <Typography variant="h5" className={classes.title}>Conteúdos</Typography>
                         <div className="app-page-title--heading">
-                            <Typography variant="h5">Conteúdos</Typography>
-                            <div className="app-page-title--description">Estes são seus conteúdos cadastrados</div>
+                            <PageListToolbar onClick={() => history.push('/content-edit')} />                            
                         </div>
-                        <Button
-                            type="button"
-                            variant="contained"
-                            fullWidth
-                            color="primary"
-                            size="large"
-                            className="mb-3 mb-md-4 mt-4"
-                            onClick={() => history.push('/content-edit')}>
-                            Cadastrar
-                        </Button>  
                     </div>
                 </div>
             </div>
