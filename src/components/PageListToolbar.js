@@ -8,7 +8,6 @@ import {
     InputAdornment,
     SvgIcon
   } from '@material-ui/core';
-  import Typography from '@mui/material/Typography';
   import SearchIcon from '@material-ui/icons/Search';
 
   const PageListToolbar = (props) => (
@@ -20,12 +19,6 @@ import {
           justifyContent: 'flex-end'
         }}
       >
-        {/* <Button>
-          Import
-        </Button>
-        <Button sx={{ mx: 1 }}>
-          Export
-        </Button> */}
         <Button
           color="primary"
           variant="contained"
@@ -36,7 +29,7 @@ import {
       <Box sx={{ mt: 3 }}>
         <Card>
           <CardContent>
-            <Box sx={{ maxWidth: 500 }}>
+            {/* <Box sx={{ maxWidth: 500 }}>
               <TextField
                 fullWidth
                 InputProps={{
@@ -54,7 +47,7 @@ import {
                 placeholder="Pesquisar"
                 variant="outlined"
               />
-            </Box>
+            </Box> */}
           </CardContent>
         </Card>
       </Box>

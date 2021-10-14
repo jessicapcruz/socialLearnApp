@@ -21,7 +21,6 @@ class ContentService{
     return await client.get(`/api/learningContents/all/itens`, config);
   }
   async register(request){
-    console.log("Register", request);
     return await client.post(`/api/learningContents/register`, request, config);
   }
   async update(id,request){

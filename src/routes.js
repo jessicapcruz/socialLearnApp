@@ -5,7 +5,7 @@ import ProgressBar from './components/ProgressBar';
 const Login = lazy(() => import('./pages/Login/login.controller'));
 const ContentList = lazy(() => import('./pages/Register/Content/contentList.controller'));
 const ContentEdit = lazy(() => import('./pages/Register/Content/contentAdd.controller'));
-const UserRegister = lazy(() => import('./pages/Register/RegisterController'));
+const UserRegister = lazy(() => import('./pages/Register/User/RegisterController'));
 const Home = lazy(() => import('./pages/Home/home.controller'))
 const Busca = lazy(() => import('./pages/Busca/BuscaController'))
 const Recover = lazy(() => import('./pages/RecoverPassword/recoverPass.controller'))

@@ -100,7 +100,6 @@ export default function MenuBar (){
         <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
         <MenuItem onClick={registerUser_onClick}>Cadastre-se</MenuItem>
         <MenuItem onClick={login_onClick}>Entrar</MenuItem>
-        <MenuItem onClick={registarContent_onClick}>Cadastrar conteúdo</MenuItem>
       </Menu>
     );
 
