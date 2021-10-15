@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css'
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useFormik } from 'formik';
@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import { green } from '@mui/material/colors';
 import CircularProgress from '@mui/material/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import  { Box, Grid, TextField, Typography, Button} from '@material-ui/core';
+import { Box, Grid, TextField, Typography, Button} from '@material-ui/core';
 import { ToastContainer } from 'react-toastify';
 import { notify } from './../../../common/util';
 import areaContents from '../../../components/AutocompleteArea/areaContentsData'
@@ -29,6 +29,11 @@ const ContentAddView = ({handleContentAreas}) => {
         },
     }));
     const classes = useStyles();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        if(!token) history.push('/login');
+    }, []);
 
     const validationSchema = yup.object({
         name: yup
