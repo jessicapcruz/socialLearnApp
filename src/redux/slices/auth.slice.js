@@ -30,7 +30,7 @@ const authSlice = createSlice({
     extraReducers: {
         [login.fulfilled]: (state, { payload }) => {
             console.log('fullfilled', payload);
-            localStorage.setItem("token", payload.token);
+            localStorage.setItem("token", payload.access_token);
             state.email = payload.email;
             state.username = payload.name;
             state.isFetching = false;

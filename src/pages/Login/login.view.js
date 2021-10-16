@@ -56,7 +56,7 @@ const LoginView = ( { formik, isFetching} ) =>{
                                 Entrar
                     </Button>
                     <Typography>
-                        <Link href="#">Esqueceu sua senha ?</Link>
+                        <Link href={ rootURL + '/recover-pass'}>Esqueceu sua senha ?</Link>
                     </Typography>
                     <Typography > Tem uma conta ?
                         <Link href={ rootURL + '/user-add'} > Cadastre-se</Link>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Cadastro from '../../components/Register/Cadastro';
+import Cadastro from '../../../components/Register/Cadastro';
 
 function RegisterView(props) {
     return (
