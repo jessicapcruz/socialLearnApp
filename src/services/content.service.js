@@ -18,8 +18,6 @@ class ContentService {
         return await client.get(`/api/learningContents`, config());
     }
     async getAll() {
-        console.log('token', localStorage.getItem('token'));
-
         return await client.get(`/api/learningContents/all/itens`, config());
     }
     async register(request) {

@@ -98,7 +98,6 @@ export default function MenuBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
             <MenuItem onClick={registerUser_onClick}>Cadastre-se</MenuItem>
             <MenuItem onClick={login_onClick}>Entrar</MenuItem>
         </Menu>
