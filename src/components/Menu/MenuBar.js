@@ -27,48 +27,34 @@ export default function MenuBar() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  
+    const registarContent_onClick = useCallback(event => {
+      setAnchorEl(null);      
+      history.push('/content-list');
+      handleMobileMenuClose();
+    }, [history]);
 
-    // eslint-disable-next-line no-unused-vars
-    const registarContent_onClick = useCallback(
-        (event) => {
-            setAnchorEl(event.currentTarget);
-            history.push('/content-list');
-            handleMobileMenuClose();
-        },
-        [history]
-    );
+    const login_onClick = useCallback(event => {
+      setAnchorEl(null);      
+      history.push('/login');
+    }, [history]);
 
-    const login_onClick = useCallback(
-        (event) => {
-            setAnchorEl(event.currentTarget);
-            history.push('/login');
-        },
-        [history]
-    );
+    const registerUser_onClick = useCallback(event => {
+      setAnchorEl(null);      
+      history.push('/user-add');
+    }, [history]);
 
-    const registerUser_onClick = useCallback(
-        (event) => {
-            setAnchorEl(event.currentTarget);
-            history.push('/user-add');
-        },
-        [history]
-    );
+    
+    const handleContentsMenuOpen_onClick = useCallback(event => {
+      setAnchorEl(null);      
+      history.push('/content-list');
+    }, [history]);
 
-    const handleContentsMenuOpen_onClick = useCallback(
-        (event) => {
-            setAnchorEl(event.currentTarget);
-            history.push('/content-list');
-        },
-        [history]
-    );
-
-    const handleHome_onClick = useCallback(
-        (event) => {
-            setAnchorEl(event.currentTarget);
-            history.push('/');
-        },
-        [history]
-    );
+    const handleHome_onClick = useCallback(event => {
+      setAnchorEl(null);      
+      history.push('/');
+    }, [history]);
+   
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -157,78 +143,76 @@ export default function MenuBar() {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="open drawer"
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        SocialLearn
-                    </Typography>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="O que você quer aprender?"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                            onKeyPress={onKeyUp}
-                        />
-                    </div>
-                    <div className={classes.grow} />
-                    <div className={classes.sectionDesktop}>
-                        <IconButton
-                            onClick={handleHome_onClick}
-                            edge="end"
-                            aria-label="home"
-                            color="inherit"
-                        >
-                            <HomeIcon />
-                        </IconButton>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+            >
+              <MenuIcon />
+            </IconButton>
+            <IconButton onClick={handleHome_onClick}
+                  edge="end"
+                  aria-label="home" 
+                  color="inherit">
+                    <HomeIcon />
+              </IconButton>
+            <Typography className={classes.title} variant="h6" noWrap>
+              SocialLearn
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="O que você quer aprender?"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                onKeyPress={onKeyUp}
+              />
+            </div>
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
 
-                        <IconButton
-                            edge="end"
-                            aria-label="conteúdos"
-                            color="inherit"
-                            onClick={handleContentsMenuOpen_onClick}
-                        >
-                            <AccountTreeIcon />
-                        </IconButton>
-                        <IconButton
-                            edge="end"
-                            aria-label="usuário"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                    </div>
-                    <div className={classes.sectionMobile}>
-                        <IconButton
-                            aria-label="mostrar mais"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
-        </div>
+              
+             <IconButton  
+                edge="end"
+                aria-label="conteúdos" 
+                color="inherit"
+                onClick={handleContentsMenuOpen_onClick}>
+                <AccountTreeIcon />
+              </IconButton>              
+              <IconButton
+                edge="end"
+                aria-label="usuário"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="mostrar mais"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </div>
     );
 }
