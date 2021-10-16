@@ -14,9 +14,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-//import { searchContent } from '../../store/actions/menuBar.action';
-import { searchContent } from '../../redux/slices/search.slice';
 import useStyles from './MenuBarStyles';
+import { getallContent } from '../../redux/slices/content.slice';
 
 export default function MenuBar() {
     const classes = useStyles();
@@ -75,7 +74,7 @@ export default function MenuBar() {
 
     const onKeyUp = (event) => {
         if (event.charCode === 13) {
-            dispatch(searchContent({ data: event.target.value }))
+            dispatch(getallContent())
                 .unwrap()
                 .then((data) => {
                     localStorage.setItem('search_list', JSON.stringify(data));
