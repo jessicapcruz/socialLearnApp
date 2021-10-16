@@ -13,10 +13,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Star from '@material-ui/icons/Star';
+import HomeIcon from '@material-ui/icons/Home';
 import useStyles from './MenuBarStyles';
 //import { searchContent } from '../../store/actions/menuBar.action';
 
@@ -54,6 +53,11 @@ export default function MenuBar (){
       history.push('/content-list');
     }, [history]);
 
+    const handleHome_onClick = useCallback(event => {
+      setAnchorEl(event.currentTarget);      
+      history.push('/');
+    }, [history]);
+   
 
     const handleProfileMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
@@ -114,29 +118,18 @@ export default function MenuBar (){
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      <MenuItem onClick={handleHome_onClick}>
+        <IconButton aria-label="home" color="inherit">
+            <HomeIcon />
+        </IconButton>
+        <p>Home</p>
+      </MenuItem>
       <MenuItem onClick={handleContentsMenuOpen_onClick}>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="consteúdos" color="inherit">
             <AccountTreeIcon />
         </IconButton>
         <p>Conteúdos</p>
       </MenuItem>
-      {/* 
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Mensagens</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notificações</p>
-      </MenuItem> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -182,32 +175,19 @@ export default function MenuBar (){
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+              <IconButton onClick={handleHome_onClick}
+                  edge="end"
+                  aria-label="home" 
+                  color="inherit">
+                    <HomeIcon />
+              </IconButton>
              <IconButton  
                 edge="end"
                 aria-label="conteúdos" 
                 color="inherit"
                 onClick={handleContentsMenuOpen_onClick}>
                 <AccountTreeIcon />
-              </IconButton>
-              {/* <IconButton aria-label="4 novas mensagens" color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                edge="end"
-                aria-label="favoritos"
-                color="inherit"
-              >
-                <Star />
-              </IconButton>
-              <IconButton aria-label="17 notificações" color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-                
-              </IconButton> */}
-              <IconButton
+              </IconButton>              <IconButton
                 edge="end"
                 aria-label="usuário"
                 aria-controls={menuId}
