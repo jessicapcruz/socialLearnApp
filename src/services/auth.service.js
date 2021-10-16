@@ -7,7 +7,7 @@ const client = axios.create({
 
 class AuthService {
     async authenticate(username, password) {
-        return await client.post("/api/auth/signin", {username: username, password: password});
+        return await client.post("/api/auth/login", {username: username, password: password});
     }
 }
   

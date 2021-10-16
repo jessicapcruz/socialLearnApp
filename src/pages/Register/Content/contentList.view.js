@@ -135,7 +135,7 @@ const ContentListView = (props) => {
                     <Typography variant="h5" className={classes.title}>Conteúdos</Typography>
                 </Grid>
                 <Grid item xs={1}>
-                    <Button color="primary" variant="contained" onClick={() => {history.push('/user-add')}}>
+                    <Button color="primary" variant="contained" onClick={() => {history.push('/content-edit')}}>
                         Adicionar
                     </Button>
                 </Grid>
