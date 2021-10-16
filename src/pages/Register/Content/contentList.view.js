@@ -41,11 +41,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GridItem({ classes, id, name, contentAreas, handleRemove }) {
-    const joinedContents = [...contentAreas].map((item) =>
+    if (!contentAreas) return <div></div>;
+    const joinedContents = contentAreas.map((item) =>
         areaContents.filter((area) => area.id === item.id)
     );
     const contents = joinedContents.map((item) => item[0]);
-    const stringContents = contents.map((item) => item.title).join(' ');
+    const stringContents = contents.map((item) => item?.title).join(' ');
 
     function generateRandomColor() {
         var letters = '0123456789ABCDEF';

@@ -11,6 +11,7 @@ import { green } from '@mui/material/colors';
 import { useFormik } from 'formik';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from 'yup';
@@ -34,9 +35,10 @@ const useStylesSelect = makeStyles((theme) => ({
     },
 }));
 
-export default function Cadastro() {
+export default function Cadastro(props) {
     const classes = useStyles();
     const classesSelect = useStylesSelect();
+    let history = useHistory();
 
     const dispatch = useDispatch();
     const [loading, setLoading] = React.useState(false);
@@ -74,14 +76,13 @@ export default function Cadastro() {
                 })
             )
                 .unwrap()
-                .then((data) => {
+                .then(() => {
                     setLoading({ open: false });
-                    console.log(data);
                     notify('Usuário cadastrado com sucesso', 'sucess');
+                    history.push('/login');
                 })
                 .catch((e) => {
                     setLoading(false);
-                    console.log(e);
                     notify('Erro ao cadastrar', 'error');
                 });
         },
@@ -102,9 +103,14 @@ export default function Cadastro() {
                         required
                         fullWidth
                         id="name"
-                        label="Nome"
+                        label="Usuário "
                         name="name"
                         type="text"
+                        inputProps={{
+                            form: {
+                                autocomplete: 'off',
+                            },
+                        }}
                         value={formik.values.name}
                         //error={formik.touched.name && Boolean(formik.errors.name)}
                         onChange={formik.handleChange}
@@ -118,6 +124,12 @@ export default function Cadastro() {
                         label="E-mail"
                         name="email"
                         type="email"
+                        autoComplete="off"
+                        inputProps={{
+                            form: {
+                                autocomplete: 'off',
+                            },
+                        }}
                         value={formik.values.email}
                         //error={formik.touched.name && Boolean(formik.errors.name)}
                         onChange={formik.handleChange}
@@ -127,6 +139,7 @@ export default function Cadastro() {
                         <Select
                             labelId="gender"
                             id="gender"
+                            name="gender"
                             value={formik.values.gender}
                             onChange={formik.handleChange}
                         >
@@ -143,6 +156,12 @@ export default function Cadastro() {
                         label="Senha"
                         name="pass"
                         type="password"
+                        form=""
+                        inputProps={{
+                            form: {
+                                autocomplete: 'off',
+                            },
+                        }}
                         value={formik.values.pass}
                         //error={formik.touched.name && Boolean(formik.errors.name)}
                         onChange={formik.handleChange}
@@ -156,6 +175,11 @@ export default function Cadastro() {
                         label="Confirmar senha"
                         name="checkPass"
                         type="password"
+                        inputProps={{
+                            form: {
+                                autocomplete: 'off',
+                            },
+                        }}
                         value={formik.values.checkPass}
                         //error={formik.touched.name && Boolean(formik.errors.name)}
                         onChange={formik.handleChange}

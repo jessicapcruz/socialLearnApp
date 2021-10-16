@@ -53,7 +53,7 @@ const ContentAddView = ({ handleContentAreas }) => {
                 dispatch(
                     registerContent({
                         name: values.name,
-                        contentAreaIds: values.contentAreaIds.map((a) => a.id),
+                        contentAreaIds: values.contentAreaIds.map((a) => a._id),
                     })
                 )
                     .unwrap()
@@ -83,7 +83,7 @@ const ContentAddView = ({ handleContentAreas }) => {
                                 align="center"
                                 margin="dense"
                             >
-                                Cadasto de Conteúdo
+                                Cadastro de Conteúdo
                             </Typography>
                             <form onSubmit={formik.handleSubmit}>
                                 <Grid container spacing={1}>
