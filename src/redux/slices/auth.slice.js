@@ -5,10 +5,10 @@ import authService from './../../services/auth.service';
 
 export const login = createAsyncThunk(
     "login",
-    async ({ username, password }, thunkAPI) => {
+    async ({ username, senha }, thunkAPI) => {
       try {
-        const response = await authService.authenticate(username, password);
-        return (response.status === 200)? response.data :  thunkAPI.rejectWithValue(response.data);      
+        const response = await authService.authenticate(username, senha);
+        return (response.status === 200 || response.status === 201 || response.status === 204)? response.data :  thunkAPI.rejectWithValue(response.data);      
       } catch (e) {
         thunkAPI.rejectWithValue(e.response.data)
       }

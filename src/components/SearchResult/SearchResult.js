@@ -6,8 +6,13 @@ import { connect } from 'react-redux'
 
 export class SearchResult extends Component {
     render() {
-        const data = localStorage.getItem('search_list')
-        if (data.size !== undefined) {
+        const data = JSON.parse(localStorage.getItem('search_list'))
+        Object.entries(data).forEach(entry => {
+            const [key, value] = entry;
+            console.log(key, value);
+          });
+
+        if (data!== null && data.length > 0) {
             return (
                 <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
                     {data.map(todo => (
