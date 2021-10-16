@@ -1,9 +1,9 @@
 const areaContents = [
-    { title: 'Artificial Intelligence', id: "1" },
-    { title: 'Banco de Dados', id: "2" },
-    { title: "Big Data", id: "3" },
-    { title: 'Cloud', id: "4" },
-    { title: 'Internet of Things', id: "5" },
-    { title: 'Programação', id: "6" },
+    { name: 'Artificial Intelligence', _id: '1' },
+    { name: 'Banco de Dados', _id: '2' },
+    { name: 'Big Data', _id: '3' },
+    { name: 'Cloud', _id: '4' },
+    { name: 'Internet of Things', _id: '5' },
+    { name: 'Programação', _id: '6' },
 ];
 export default areaContents;

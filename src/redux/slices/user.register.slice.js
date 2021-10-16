@@ -1,17 +1,22 @@
 //Com reduxjs/toolkit, reducers e actions ficam nos arquivos slices
 //ver: https://redux-toolkit.js.org/tutorials/quick-start
-import { createSlice, createAsyncThunk  } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import initialState from '../initialState';
 import userService from './../../services/user.service';
 
 export const registerUser = createAsyncThunk(
-    "user/register",
+    'user/register',
     async ({ name, email, senha, gender }, thunkAPI) => {
         try {
-            const response = await userService.register({ name, email, senha, gender});
-            return (response.status === 200) ? 
-                    response.data :  
-                    thunkAPI.rejectWithValue(response.data);      
+            const response = await userService.register({
+                name,
+                email,
+                senha,
+                gender,
+            });
+            return response.status === 200
+                ? response.data
+                : thunkAPI.rejectWithValue(response.data);
         } catch (error) {
             thunkAPI.rejectWithValue(error.response.data);
         }
@@ -19,20 +24,25 @@ export const registerUser = createAsyncThunk(
 );
 
 export const recover = createAsyncThunk(
-    "recover/password",
+    'recover/password',
     async ({ email }, thunkAPI) => {
-      try {
-        const response = await userService.recover(email);
-        return (response.status === 200)? response.data :  thunkAPI.rejectWithValue(response.data);      
-      } catch (e) {
-        thunkAPI.rejectWithValue(e.response.data)
-      }
+        try {
+            const response = await userService.recover(email);
+            return response.status === 200
+                ? response.data
+                : thunkAPI.rejectWithValue(response.data);
+        } catch (e) {
+            thunkAPI.rejectWithValue(e.response.data);
+        }
     }
 );
 
-const userInitialState = { register: initialState.register, loading: initialState.loading };
+const userInitialState = {
+    register: initialState.register,
+    loading: initialState.loading,
+};
 const userRegisterSlice = createSlice({
-    name: "userRegister",
+    name: 'userRegister',
     initialState: userInitialState,
     reducers: {
         // add your non-async reducers here
@@ -49,13 +59,14 @@ const userRegisterSlice = createSlice({
             return state;
         },
         [registerUser.rejected]: (state, action) => {
+            // eslint-disable-next-line no-unused-vars
             const payload = [...action.payload];
             state.loading.open = false;
         },
         [registerUser.pending]: (state) => {
             state.loading.open = true;
         },
-    }
+    },
 });
 
 export const { clearState } = userRegisterSlice.actions;
