@@ -2,11 +2,9 @@ import React , { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-//import PropTypes from 'prop-types';
 import { green } from '@mui/material/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-//import Box from '@material-ui/core/Box';
 import  Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
@@ -17,7 +15,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify';
 import { notify } from './../../common/util';
-//import { registerUser  } from '../../store/actions/cadastro.action';
 import { registerUser } from "../../redux/slices/user.register.slice";
 
 
@@ -69,20 +66,12 @@ export default function Cadastro() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       setLoading(true);
-      //alert(JSON.stringify(values));
       dispatch(registerUser({  name : values.name, senha: values.pass,  email: values.email, gender: values.gender}))
        .unwrap()
        .then(data => {
         setLoading({open: false });
          console.log(data);
-      //   // setUser({
-      //   //   id: data.id,
-      //   //   title: data.title,
-      //   //   description: data.description,
-      //   //   published: data.published
-      //   // });
          notify('Usuário cadastrado com sucesso', 'sucess');
-      //   //window.location.replace(rootUrl + 'login');
        })
        .catch(e => {
         setLoading(false);
@@ -91,29 +80,6 @@ export default function Cadastro() {
        });
     },
 });
-
-  // const handleChangeGender = (event) => {
-  //   const { gender, value } = event.target;
-  //   setUser({ ...userState, [gender]: value });
-  // };
-
-  // const handleChangeName = (event) => {
-  //   const { name, value } = event.target;
-  //   setUser({ ...userState, [name]: value });
-  // };
-
-  // const handleChangeEmail = (event) => {
-  //   const { email, value } = event.target;
-  //   setUser({ ...userState, [email]: value });
-  // };
-  // const handleChangePass = (event) => {
-  //   const { pass, value } = event.target;
-  //   setUser({ ...userState, [pass]: value });
-  // };
-  // const handleChangeCheckPass = (event) => {
-  //   const { checkPass, value } = event.target;
-  //   setUser({ ...userState, [checkPass]: value });
-  // };
 
   return (
         <div className={classes.root}>

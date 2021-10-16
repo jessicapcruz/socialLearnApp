@@ -9,16 +9,15 @@ import LoginView from './login.view';
 const LoginController = () =>{
     const dispatch = useDispatch();
     const history = useHistory();
-    //const { auth } = useSelector(state => state.auth)
     const { isFetching, isSuccess, isError, errorMessage } = useSelector(authSelector);
 
     const formik = useFormik({
         initialValues: {
-          username: 'jhon',
-          password: 'jjj',
+          username: '',
+          senha: '',
         },
-        //validationSchema: validationSchema,
         onSubmit: values => dispatch(login({...values, history})),
+        
     });
 
     useEffect(() => {

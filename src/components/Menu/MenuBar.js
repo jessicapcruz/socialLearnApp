@@ -79,11 +79,11 @@ export default function MenuBar (){
 
     const onKeyUp = (event) => {
       if (event.charCode === 13) {
-        console.log('searchContent');
         dispatch(searchContent({data:event.target.value }))
         .unwrap()
         .then(data => {     
-          history.push(data, 'result', '/search-result');
+          localStorage.setItem('search_list', JSON.stringify(data))
+          history.push('/busca');
        }).catch(e => {
           console.log(e);
        });
@@ -181,13 +181,15 @@ export default function MenuBar (){
                   color="inherit">
                     <HomeIcon />
               </IconButton>
+              
              <IconButton  
                 edge="end"
                 aria-label="conteúdos" 
                 color="inherit"
                 onClick={handleContentsMenuOpen_onClick}>
                 <AccountTreeIcon />
-              </IconButton>              <IconButton
+              </IconButton>              
+              <IconButton
                 edge="end"
                 aria-label="usuário"
                 aria-controls={menuId}
