@@ -1,29 +1,34 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory} from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useFormik } from 'formik';
+import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import {login, logout, clearState , authSelector} from './../../redux/slices/auth.slice'
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import {
+    authSelector,
+    clearState,
+    login,
+} from './../../redux/slices/auth.slice';
 import LoginView from './login.view';
 
-const LoginController = () =>{
+const LoginController = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { isFetching, isSuccess, isError, errorMessage } = useSelector(authSelector);
+    const { isFetching, isSuccess, isError, errorMessage } =
+        useSelector(authSelector);
 
     const formik = useFormik({
         initialValues: {
-          username: '',
-          senha: '',
+            username: '',
+            senha: '',
         },
-        onSubmit: values => dispatch(login({...values, history})),
-        
+        onSubmit: (values) => dispatch(login({ ...values, history })),
     });
 
     useEffect(() => {
         return dispatch(clearState());
     });
-    
+
     useEffect(() => {
         if (isError) {
             console.error(errorMessage);
@@ -38,7 +43,7 @@ const LoginController = () =>{
         }
     }, [isError, isSuccess]);
 
-    return <LoginView formik={formik}  isFetching={isFetching}  />//onSubmit={handleSubmit(onSubmit)}
-}
+    return <LoginView formik={formik} isFetching={isFetching} />; //onSubmit={handleSubmit(onSubmit)}
+};
 
 export default LoginController;
