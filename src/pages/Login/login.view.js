@@ -16,21 +16,26 @@ const LoginView = ( { formik, isFetching} ) =>{
                     <form onSubmit={formik.handleSubmit}>
                     <div className="mt-4">
                         <TextField 
+                            id="username"
                             label='Usuario' 
                             placeholder='usuario' 
+                            type='email'
                             fullWidth 
                             required
                             value={formik.values.email}
                             onChange={formik.handleChange} />
 
                         <TextField 
+                            id="senha"
                             label='Senha' 
                             placeholder='senha' 
-                            type='password' 
+                            type='password'
                             fullWidth 
                             required
-                            value={formik.values.password}
+                            value={formik.values.senha}
                             onChange={formik.handleChange}/>
+
+                            
 
                         <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>
                             {isFetching ? (
