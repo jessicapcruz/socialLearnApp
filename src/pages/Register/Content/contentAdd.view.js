@@ -30,11 +30,6 @@ const ContentAddView = ({handleContentAreas}) => {
     }));
     const classes = useStyles();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token")
-        if(!token) history.push('/login');
-    }, []);
-
     const validationSchema = yup.object({
         name: yup
           .string('Entre com o nome')
