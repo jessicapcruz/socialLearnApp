@@ -10,7 +10,7 @@ export const registerContent = createAsyncThunk(
     async ({ name, contentAreaIds}, thunkAPI) => {
         try {
             const response = await contentService.register({ name, contentAreaIds});
-            return (response.status === 200) ? 
+            return (response.status === 200 || response.status === 201 || response.status === 204) ? 
                     response.data :  
                     thunkAPI.rejectWithValue(response.data);      
         } catch (error) {
@@ -24,7 +24,7 @@ export const getallContent = createAsyncThunk(
     async (thunkAPI) => {
         try {
             const response = await contentService.getAll();
-            return (response.status === 200) ? 
+            return (response.status === 200 || response.status === 201 || response.status === 204) ? 
                     response.data :  
                     thunkAPI.rejectWithValue(response.data);      
         } catch (error) {

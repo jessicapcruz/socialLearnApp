@@ -22,7 +22,6 @@ export const recover = createAsyncThunk(
     "recover/password",
     async ({ email }, thunkAPI) => {
       try {
-          console.log('email ' + email)
         const response = await userService.recover(email);
         return (response.status === 200)? response.data :  thunkAPI.rejectWithValue(response.data);      
       } catch (e) {
@@ -45,14 +44,12 @@ const userRegisterSlice = createSlice({
     extraReducers: {
         // add your async reducers here
         [registerUser.fulfilled]: (state, { payload }) => {
-            console.log('fullfilled', payload);
             state.register = payload.register;
             state.loading.open = false;
             return state;
         },
         [registerUser.rejected]: (state, action) => {
             const payload = [...action.payload];
-            console.log('rejected', payload);
             state.loading.open = false;
         },
         [registerUser.pending]: (state) => {
