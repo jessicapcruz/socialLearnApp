@@ -10,7 +10,7 @@ import {
   } from '@material-ui/core';
   import SearchIcon from '@material-ui/icons/Search';
 
-  const PageListToolbar = (props) => (
+  const PageListToolbar = (props) => (   
     <Box {...props}>
         
       <Box
@@ -22,7 +22,7 @@ import {
         <Button
           color="primary"
           variant="contained"
-        >
+          onClick={props.onAddContent}>
           Adicionar
         </Button>
       </Box>

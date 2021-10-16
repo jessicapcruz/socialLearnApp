@@ -93,11 +93,7 @@ const ContentListView = (props) => {
     const [contents, setContents] = React.useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem("token")
-        if(!token)
-             history.push('/login');
-        else
-            loadItems();
+        loadItems();
     }, []);
 
     const handleDelete = (id) => { 
