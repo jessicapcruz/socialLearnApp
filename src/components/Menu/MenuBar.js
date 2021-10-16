@@ -32,29 +32,29 @@ export default function MenuBar (){
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   
     const registarContent_onClick = useCallback(event => {
-      setAnchorEl(event.currentTarget);      
+      setAnchorEl(null);      
       history.push('/content-list');
       handleMobileMenuClose();
     }, [history]);
 
     const login_onClick = useCallback(event => {
-      setAnchorEl(event.currentTarget);      
+      setAnchorEl(null);      
       history.push('/login');
     }, [history]);
 
     const registerUser_onClick = useCallback(event => {
-      setAnchorEl(event.currentTarget);      
+      setAnchorEl(null);      
       history.push('/user-add');
     }, [history]);
 
     
     const handleContentsMenuOpen_onClick = useCallback(event => {
-      setAnchorEl(event.currentTarget);      
+      setAnchorEl(null);      
       history.push('/content-list');
     }, [history]);
 
     const handleHome_onClick = useCallback(event => {
-      setAnchorEl(event.currentTarget);      
+      setAnchorEl(null);      
       history.push('/');
     }, [history]);
    
@@ -156,6 +156,12 @@ export default function MenuBar (){
             >
               <MenuIcon />
             </IconButton>
+            <IconButton onClick={handleHome_onClick}
+                  edge="end"
+                  aria-label="home" 
+                  color="inherit">
+                    <HomeIcon />
+              </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
               SocialLearn
             </Typography>
@@ -175,12 +181,7 @@ export default function MenuBar (){
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton onClick={handleHome_onClick}
-                  edge="end"
-                  aria-label="home" 
-                  color="inherit">
-                    <HomeIcon />
-              </IconButton>
+
               
              <IconButton  
                 edge="end"
