@@ -15,7 +15,7 @@ const config = {
 class UserService {
     async register(data) {
         const request = { name : data.name, 'username': data.name, password: data.senha,  email: data.email, gender: data.gender };
-        return await client.post("/api/users/register", request, config);
+        return await client.post("/api/user/register", request, config);
     }
 
     async recover(data) {
